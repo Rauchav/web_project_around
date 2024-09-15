@@ -1,0 +1,254 @@
+body {
+  background-color: black;
+  margin: 0;
+}
+
+h2,
+h3,
+p {
+  margin: 0;
+}
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 45px 200px 60px 200px;
+  color: white;
+}
+
+.header {
+  width: 100%;
+  height: 74px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid #545454;
+}
+
+.logo {
+  max-width: 173px;
+}
+
+.profile {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile__info-text {
+  margin-left: 30px;
+}
+
+.profile__info-picture {
+  max-width: 120px;
+  max-height: 120px;
+  border-radius: 200px;
+}
+
+.profile__info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.profile__info-up {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile__info-up-name {
+  font-family: "Inter Medium", sans-serif;
+  font-size: 42px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.profile__info-up-edit-button {
+  margin-left: 15px;
+  border: white solid 1px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile__info-edit-icon {
+  height: 10px;
+  width: 10px;
+}
+
+.profile__info-down {
+  font-family: "Inter Regular", sans-serif;
+  font-size: 18px;
+}
+
+.profile__info-name-profession {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.profile__add-button {
+  width: 150px;
+  height: 50px;
+  border: solid white 2px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile__add-button-icon {
+  height: 22px;
+  width: 22px;
+}
+
+.posts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  column-gap: 17px;
+  row-gap: 20px;
+  box-sizing: content-box;
+}
+
+.post {
+  background-color: white;
+  border-radius: 10px;
+  color: black;
+  font-family: "Inter Black", sans-serif;
+  font-size: 20px;
+  width: 282px;
+  height: 361px;
+  display: flex;
+  flex-direction: column;
+}
+
+.post__picture {
+  width: 282px;
+  height: 282px;
+}
+
+.post__info-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 18px 0 18px;
+  margin-top: 25px;
+}
+
+.post__info-bar-name {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.post__info-bar-heart {
+  width: 21px;
+  height: 19px;
+}
+
+.footer {
+  font-family: "Inter Regular", sans-serif;
+  font-size: 18px;
+  color: #545454;
+  margin-top: 67px;
+}
+
+@media screen and (max-width: 768px) {
+  .page {
+    padding: 45px 0 60px 0;
+  }
+
+  .header {
+    width: 78%;
+  }
+
+  .posts {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    margin: 0;
+  }
+
+  .profile {
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .profile__add-button {
+    width: 86%;
+    margin-top: 50px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .page {
+    padding: 28px 0 36px 0;
+  }
+
+  .header {
+    width: 100%;
+    box-sizing: content-box;
+    height: 56px;
+  }
+
+  .logo {
+    margin-left: 27px;
+  }
+
+  .posts {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    margin: 0;
+  }
+
+  .profile {
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .profile__info {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .profile__info-up-name {
+    font-size: 22px;
+  }
+
+  .profile__info-down-profession {
+    text-align: center;
+  }
+
+  .profile__add-button {
+    max-width: 90%;
+    margin-top: 50px;
+  }
+
+  .footer {
+    width: 85%;
+    margin-top: 50px;
+  }
+
+  .footer__copyright {
+    font-size: 14px;
+    text-align: left;
+  }
+}
