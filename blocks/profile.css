@@ -1,0 +1,129 @@
+.profile {
+  width: 100%;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile__info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.profile__info-picture {
+  max-width: 120px;
+  max-height: 120px;
+  border-radius: 200px;
+}
+
+.profile__info-text {
+  margin-left: 30px;
+}
+
+.profile__info-up {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile__info-up-name {
+  font-family: "Inter Medium", sans-serif;
+  font-size: 42px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.profile__info-up-edit-button {
+  margin-left: 15px;
+  border: white solid 1px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile__info-edit-icon {
+  height: 10px;
+  width: 10px;
+}
+
+.profile__info-down {
+  font-family: "Inter Regular", sans-serif;
+  font-size: 18px;
+}
+
+.profile__info-name-profession {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.profile__add-button {
+  width: 150px;
+  height: 50px;
+  border: solid white 2px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile__add-button-icon {
+  height: 22px;
+  width: 22px;
+}
+
+@media screen and (max-width: 768px) {
+  .profile {
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .profile__add-button {
+    width: 75%;
+    margin-top: 50px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .profile {
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .profile__info {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .profile__info-up-name {
+    font-size: 22px;
+  }
+
+  .profile__info-down-profession {
+    text-align: center;
+  }
+
+  .profile__add-button {
+    width: 88%;
+    margin-top: 50px;
+  }
+}
