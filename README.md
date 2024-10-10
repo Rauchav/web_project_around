@@ -8,5 +8,5 @@
 
 4. Autor del proyecto: Raúl Chávez Valdivia Velarde
 
-5. Esta proyecto está publicado en la web con este link:
+5. Este proyecto está publicado en la web con este url:
    https://rauchav.github.io/web_project_around/
