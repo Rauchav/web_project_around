@@ -1,30 +1,10 @@
-let editProfileButton = document.querySelector(".profile__info-up-edit-button");
-let closeModalButton = document.querySelector(".close-icon");
-let submitButton = document.querySelector(".modal__box-form-button");
-let modal = document.querySelector(".modal");
-let nameInput = document.querySelector("#name");
-let professionInput = document.querySelector("#profession");
-let newName = document.querySelector(".profile__info-up-name");
-let newProfession = document.querySelector(".profile__info-down-profession");
+const pageFrame = document.querySelector(".page");
 
-let postsCardsContainer = document.querySelector(".posts");
-let cardTemplate = document.querySelector(".post__template");
-let cardContainer = document.querySelector(".post");
+//Tarjetas iniciales
 
-function openModal() {
-  modal.classList.add("modal-toggle");
-}
-
-function closeModal() {
-  modal.classList.remove("modal-toggle");
-}
-
-function submitInputInfo(event) {
-  event.preventDefault();
-  newName.textContent = nameInput.value;
-  newProfession.textContent = professionInput.value;
-  closeModal();
-}
+const postsCardsContainer = document.querySelector(".posts");
+const cardTemplate = document.querySelector(".post__template");
+const cardContainer = document.querySelector(".post");
 
 const initialCards = [
   {
@@ -64,6 +44,100 @@ initialCards.forEach((card) => {
   postsCardsContainer.append(clonedCard);
 });
 
-editProfileButton.addEventListener("click", openModal);
-closeModalButton.addEventListener("click", closeModal);
-submitButton.addEventListener("click", submitInputInfo);
+//Abrrir y cerrar modal de información de usuario
+
+const editProfileButton = document.querySelector(
+  ".profile__info-up-edit-button"
+);
+const modalTemplateUserInfo = document.querySelector(".modal__box-template");
+const modalCloneUserInfo = modalTemplateUserInfo.cloneNode(true).content;
+const modalUserInfo = modalCloneUserInfo.querySelector(".modal");
+const modalUserInfoTitle = modalUserInfo.querySelector(".modal__box-title");
+const modalUserInfoForm = modalUserInfo.querySelector(".modal__box-form");
+const closeModalButtonUserInfo =
+  modalCloneUserInfo.querySelector(".close-icon");
+
+function openModalUserInfo() {
+  modalUserInfoTitle.textContent = "Editar Perfil";
+  modalUserInfoForm.querySelector("#input1").placeholder = "Nombre";
+  modalUserInfoForm.querySelector("#input2").placeholder = "Acerca de mí";
+  pageFrame.append(modalUserInfo);
+}
+
+function closeModalUserInfo() {
+  modalUserInfo.remove();
+}
+
+editProfileButton.addEventListener("click", openModalUserInfo);
+closeModalButtonUserInfo.addEventListener("click", closeModalUserInfo);
+
+//Cambiar información de usuario
+
+const nameInput = modalUserInfo.querySelector("#input1");
+const professionInput = modalUserInfo.querySelector("#input2");
+const newName = document.querySelector(".profile__info-up-name");
+const newProfession = document.querySelector(".profile__info-down-profession");
+const submitButtonUserInfo = modalUserInfo.querySelector(
+  ".modal__box-form-button"
+);
+
+function submitUserInfo(event) {
+  event.preventDefault();
+
+  newName.textContent = nameInput.value;
+  newProfession.textContent = professionInput.value;
+  closeModalUserInfo();
+}
+
+submitButtonUserInfo.addEventListener("click", submitUserInfo);
+
+//Abrrir y cerrar modal para ańadir tarjeta
+
+const addCardButton = document.querySelector(".add__card-button");
+const modalTemplateAddCard = document.querySelector(".modal__box-template");
+const modalCloneAddCard = modalTemplateAddCard.cloneNode(true).content;
+const modalAddCard = modalCloneAddCard.querySelector(".modal");
+const modalAddCardTitle = modalAddCard.querySelector(".modal__box-title");
+const closeModalButtonAddCard = modalCloneAddCard.querySelector(".close-icon");
+
+function openModalAddCard() {
+  modalAddCardTitle.textContent = "New Place";
+  modalAddCard.querySelector("#input1").placeholder = "Title";
+  modalAddCard.querySelector("#input2").placeholder = "Image URL";
+  pageFrame.append(modalAddCard);
+}
+
+function closeModalAddCard() {
+  modalAddCard.remove();
+}
+
+addCardButton.addEventListener("click", openModalAddCard);
+closeModalButtonAddCard.addEventListener("click", closeModalAddCard);
+
+//Crear tarjetas nuevas
+
+const titleInput = modalAddCard.querySelector("#input1");
+const urlLinkInput = modalAddCard.querySelector("#input2");
+const templateAddCard = document.querySelector(".post__template");
+const cloneAddCard = templateAddCard.cloneNode(true).content;
+const newTitle = cloneAddCard.querySelector(".post__info-bar-name");
+const newImage = cloneAddCard.querySelector(".post__picture");
+const cardsContainer = document.querySelector(".posts");
+const submitButtonAddCard = modalAddCard.querySelector(
+  ".modal__box-form-button"
+);
+
+function submitCardInfo(event) {
+  event.preventDefault();
+
+  newTitle.textContent = titleInput.value;
+  newImage.src = urlLinkInput.value;
+
+  cardsContainer.prepend(cloneAddCard);
+
+  console.log(cardsContainer);
+
+  closeModalAddCard();
+}
+
+submitButtonAddCard.addEventListener("click", submitCardInfo);

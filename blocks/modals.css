@@ -4,7 +4,7 @@
   background-color: rgba(0, 0, 0, 0.762);
   position: absolute;
   top: 0;
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -45,6 +45,7 @@
 
 .modal__box-title {
   font-family: "Inter Black", sans-serif;
+  color: black;
   font-size: 24px;
   text-align: left;
   width: 358px;
@@ -57,6 +58,7 @@
   margin-bottom: 29.74px;
   border: none;
   border-bottom: solid #c4c4c4 2px;
+  color: black;
 }
 
 .modal__box-form-input::placeholder {

@@ -54,7 +54,7 @@
               </div>
             </div>
           </div>
-          <div class="profile__add-button hovered-add">
+          <div class="add__card-button hovered-add">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="40px"
@@ -88,42 +88,46 @@
           <p class="footer__copyright">© 2021 Around The U.S.</p>
         </footer>
       </div>
-    </div>
-    <div class="modal">
-      <div class="modal__close-box">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="40px"
-          viewBox="0 -960 960 960"
-          width="40px"
-          fill="#e8eaed"
-          class="close-icon"
-        >
-          <path
-            d="m291-240-51-51 189-189-189-189 51-51 189 189 189-189 51 51-189 189 189 189-51 51-189-189-189 189Z"
-          />
-        </svg>
-      </div>
-      <div class="modal__box">
-        <form class="modal__box-form">
-          <h3 class="modal__box-title">Editar perfil</h3>
-          <input
-            type="text"
-            id="name"
-            placeholder="Nombre"
-            class="modal__box-form-input"
-            required
-          />
-          <input
-            type="text"
-            id="profession"
-            placeholder="Acerca de mí"
-            class="modal__box-form-input"
-            required
-          />
-          <button type="submit" class="modal__box-form-button">Guardar</button>
-        </form>
-      </div>
+      <template class="modal__box-template">
+        <div class="modal">
+          <div class="modal__close-box">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="40px"
+              viewBox="0 -960 960 960"
+              width="40px"
+              fill="#e8eaed"
+              class="close-icon"
+            >
+              <path
+                d="m291-240-51-51 189-189-189-189 51-51 189 189 189-189 51 51-189 189 189 189-51 51-189-189-189 189Z"
+              />
+            </svg>
+          </div>
+          <div class="modal__box">
+            <form class="modal__box-form">
+              <h3 class="modal__box-title"></h3>
+              <input
+                type="text"
+                id="input1"
+                placeholder=""
+                class="modal__box-form-input"
+                required
+              />
+              <input
+                type="text"
+                id="input2"
+                placeholder=""
+                class="modal__box-form-input"
+                required
+              />
+              <button type="submit" class="modal__box-form-button">
+                Guardar
+              </button>
+            </form>
+          </div>
+        </div>
+      </template>
     </div>
     <script src="./pages/script.js"></script>
   </body>
