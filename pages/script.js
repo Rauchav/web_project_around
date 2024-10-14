@@ -204,8 +204,6 @@ cardImagesArray.forEach((card) => {
     cardImage.src = currentCardImage.src;
     cardTitle.textContent = currentCardTitle;
 
-    console.log(currentCardTitle);
-
     pageFrame.append(modalCard);
   });
 });
