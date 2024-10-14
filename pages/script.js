@@ -101,9 +101,9 @@ const modalAddCardTitle = modalAddCard.querySelector(".modal__box-title");
 const closeModalButtonAddCard = modalCloneAddCard.querySelector(".close-icon");
 
 function openModalAddCard() {
-  modalAddCardTitle.textContent = "New Place";
-  modalAddCard.querySelector("#input1").placeholder = "Title";
-  modalAddCard.querySelector("#input2").placeholder = "Image URL";
+  modalAddCardTitle.textContent = "Nuevo Lugar";
+  modalAddCard.querySelector("#input1").placeholder = "Título";
+  modalAddCard.querySelector("#input2").placeholder = "URL de la imagen";
   pageFrame.append(modalAddCard);
 }
 
@@ -135,9 +135,82 @@ function submitCardInfo(event) {
 
   cardsContainer.prepend(cloneAddCard);
 
-  console.log(cardsContainer);
-
   closeModalAddCard();
 }
 
 submitButtonAddCard.addEventListener("click", submitCardInfo);
+
+//Borrar tarjetas
+
+const trashButtons = Array.from(document.querySelectorAll(".trash-icon"));
+
+trashButtons.forEach((button) => {
+  button.addEventListener("click", (event) => {
+    event.currentTarget.parentElement.remove();
+  });
+});
+
+//Darle Like o dislike a una tarjeta
+
+const heartButtons = Array.from(document.querySelectorAll(".heart-icon"));
+
+const hearts = [
+  {
+    alt: "Not liked",
+    src: "./images/heart-icon.svg",
+  },
+
+  {
+    class: "Liked",
+    src: "./images/heart-icon-black.svg",
+  },
+];
+
+heartButtons.forEach((heart) => {
+  heart.addEventListener("click", (event) => {
+    let currentIcon = event.currentTarget;
+
+    if (currentIcon.alt === "Not liked") {
+      currentIcon.alt = hearts[1].alt;
+      currentIcon.src = hearts[1].src;
+    } else {
+      currentIcon.alt = hearts[0].alt;
+      currentIcon.src = hearts[0].src;
+    }
+  });
+});
+
+//Abrir modal con información de cada tarjeta
+
+const modalCardTemplate = document.querySelector(".modal__card-template");
+const modalCardClone = modalCardTemplate.cloneNode(true).content;
+const modalCard = modalCardClone.querySelector(".modal");
+const cardsList = document.querySelectorAll(".post");
+const cardsArray = Array.from(cardsList);
+const cardImagesList = document.querySelectorAll(".post__picture");
+const cardImagesArray = Array.from(cardImagesList);
+const cardImage = modalCardClone.querySelector(".modal__card-image");
+const cardTitle = modalCardClone.querySelector(".modal__card-title");
+const closeCardModalButton = modalCardClone.querySelector(".close-icon");
+
+console.log(cardsList);
+
+cardImagesArray.forEach((card) => {
+  card.addEventListener("click", (event) => {
+    let currentCardImage = event.currentTarget;
+    let currentCardTitle =
+      event.currentTarget.nextElementSibling.firstElementChild.textContent;
+
+    cardImage.src = currentCardImage.src;
+    cardTitle.textContent = currentCardTitle;
+
+    console.log(currentCardTitle);
+
+    pageFrame.append(modalCard);
+  });
+});
+
+function closeCardModal() {
+  modalCard.remove();
+}
+closeCardModalButton.addEventListener("click", closeCardModal);
