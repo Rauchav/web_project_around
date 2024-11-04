@@ -117,23 +117,37 @@
             </svg>
           </div>
           <div class="modal__box">
-            <form class="modal__box-form">
+            <form class="modal__box-form" novalidate>
               <h3 class="modal__box-title"></h3>
-              <input
-                type="text"
-                id="input1"
-                placeholder=""
-                class="modal__box-form-input"
-                required
-              />
-              <input
-                type="text"
-                id="input2"
-                placeholder=""
-                class="modal__box-form-input"
-                required
-              />
-              <button type="submit" class="modal__box-form-button">
+              <label class="modal__box-form-field">
+                <input
+                  type="text"
+                  id="input1"
+                  placeholder=""
+                  class="modal__box-form-input"
+                  minlength="2"
+                  maxlength="40"
+                  required
+                />
+                <span id="errorMsg1" class="input1-error input-error"></span>
+              </label>
+              <label class="modal__box-form-field">
+                <input
+                  type="text"
+                  id="input2"
+                  placeholder=""
+                  class="modal__box-form-input"
+                  minlength="2"
+                  maxlength="200"
+                  required
+                />
+                <span id="errorMsg2" class="input2-error input-error"></span>
+              </label>
+              <button
+                type="submit"
+                class="modal__box-form-button"
+                name="submit"
+              >
                 Guardar
               </button>
             </form>
@@ -166,5 +180,6 @@
       </template>
     </div>
     <script src="./pages/script.js"></script>
+    <script src="./pages/validate.js"></script>
   </body>
 </html>

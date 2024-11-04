@@ -56,8 +56,7 @@
 
 .modal__box {
   background-color: white;
-  width: 430px;
-  height: 330px;
+  padding: 30px;
   border-radius: 10px;
 }
 
@@ -79,13 +78,21 @@
   margin-bottom: 54px;
 }
 
+.modal__box-form-field {
+  min-height: 80px;
+}
+
 .modal__box-form-input {
   width: 358px;
   height: 27.26px;
-  margin-bottom: 29.74px;
   border: none;
   border-bottom: solid #c4c4c4 2px;
   color: black;
+  margin-bottom: 5px;
+}
+
+.modal__box-form-input-error {
+  border-bottom: solid red 2px;
 }
 
 .modal__box-form-input::placeholder {
@@ -93,6 +100,18 @@
   font-size: 14px;
   color: #c4c4c4;
   opacity: 1;
+}
+
+.input-error {
+  font-family: "Inter Regular", sans-serif;
+  font-size: 12px;
+  color: red;
+  display: none;
+  width: 358px;
+}
+
+.input-error-show {
+  display: block;
 }
 
 .modal__box-form-button {
@@ -105,7 +124,18 @@
   font-family: "Inter Regular", sans-serif;
   font-size: 18px;
   color: white;
-  opacity: 1;
+}
+
+.modal__box-form-button-inactive {
+  margin-top: 18.28px;
+  width: 358px;
+  height: 50.15px;
+  background-color: rgba(0, 0, 0, 0);
+  border: 2px solid #c4c4c4;
+  border-radius: 2px;
+  font-family: "Inter Regular", sans-serif;
+  font-size: 18px;
+  color: #c4c4c4;
 }
 
 .modal__box-form-button:hover {

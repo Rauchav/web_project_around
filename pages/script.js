@@ -56,12 +56,30 @@ function openModalAddCard() {
   modalAddCardTitle.textContent = "Nuevo Lugar";
   modalAddCard.querySelector("#input1").placeholder = "Título";
   modalAddCard.querySelector("#input2").placeholder = "URL de la imagen";
+  modalAddCard.querySelector("#input2").type = "url";
   pageFrame.append(modalAddCard);
+
+  extractModalAddCard(modalAddCard);
 }
+
+modalAddCard.addEventListener("click", (evt) => {
+  if (
+    evt.target.classList.contains("modal") ||
+    evt.target.classList.contains("close-icon")
+  ) {
+    closeModalAddCard();
+  }
+});
 
 function closeModalAddCard() {
   modalAddCard.remove();
 }
+
+document.addEventListener("keydown", function (evt) {
+  if (evt.key === "Escape") {
+    closeModalAddCard();
+  }
+});
 
 addCardButton.addEventListener("click", openModalAddCard);
 closeModalButtonAddCard.addEventListener("click", closeModalAddCard);
@@ -105,12 +123,30 @@ function openModalUserInfo() {
   modalUserInfoTitle.textContent = "Editar Perfil";
   modalUserInfoForm.querySelector("#input1").placeholder = "Nombre";
   modalUserInfoForm.querySelector("#input2").placeholder = "Acerca de mí";
+  modalUserInfoForm.name = "UserInfoForm";
   pageFrame.append(modalUserInfo);
+
+  extractModalUserInfo(modalUserInfo);
 }
+
+modalUserInfo.addEventListener("click", (evt) => {
+  if (
+    evt.target.classList.contains("modal") ||
+    evt.target.classList.contains("close-icon")
+  ) {
+    closeModalUserInfo();
+  }
+});
 
 function closeModalUserInfo() {
   modalUserInfo.remove();
 }
+
+document.addEventListener("keydown", function (evt) {
+  if (evt.key === "Escape") {
+    closeModalUserInfo();
+  }
+});
 
 editProfileButton.addEventListener("click", openModalUserInfo);
 closeModalButtonUserInfo.addEventListener("click", closeModalUserInfo);
@@ -160,7 +196,7 @@ postsCardsContainer.addEventListener("click", (event) => {
   }
 });
 
-//Open expanded post picture
+//Open and close expanded post picture
 
 const modalCardTemplate = document.querySelector(".modal__card-template");
 const modalCardClone = modalCardTemplate.cloneNode(true).content;
@@ -185,6 +221,17 @@ postsCardsContainer.addEventListener("click", (event) => {
   }
 });
 
-closeCardModalButton.addEventListener("click", (event) => {
-  modalCard.remove();
+modalCard.addEventListener("click", (evt) => {
+  if (
+    evt.target.classList.contains("modal") ||
+    evt.target.classList.contains("close-icon")
+  ) {
+    modalCard.remove();
+  }
+});
+
+document.addEventListener("keydown", function (evt) {
+  if (evt.key === "Escape") {
+    modalCard.remove();
+  }
 });
