@@ -59,7 +59,7 @@ function openModalAddCard() {
   modalAddCard.querySelector("#input2").type = "url";
   pageFrame.append(modalAddCard);
 
-  extractModalAddCard(modalAddCard);
+  transferModalInfo(modalAddCard);
 }
 
 modalAddCard.addEventListener("click", (evt) => {
@@ -126,7 +126,7 @@ function openModalUserInfo() {
   modalUserInfoForm.name = "UserInfoForm";
   pageFrame.append(modalUserInfo);
 
-  extractModalUserInfo(modalUserInfo);
+  transferModalInfo(modalUserInfo);
 }
 
 modalUserInfo.addEventListener("click", (evt) => {
