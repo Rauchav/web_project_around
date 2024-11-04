@@ -1,11 +1,3 @@
-function transferModalInfo(element) {
-  if (element === modalAddCard) {
-    validateForm(element);
-  } else {
-    validateForm(element);
-  }
-}
-
 function validateForm(element) {
   const formElement = element.querySelector(".modal__box-form");
   const closeElement = element.querySelector(".close-icon");
