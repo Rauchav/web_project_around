@@ -10,7 +10,7 @@
 - Abrir la foto de cada post en un modal
 - Validar la información de los formularios
 
-3. Planes de mejora del proyecto: Este proyecto tendrá animaciones, muchas más interacciones y ya pronto podré almacener datos en el servidor local.
+3. Planes de mejora del proyecto: Este proyecto tendrá animaciones, muchas más interacciones y ya pronto podré almacenar datos en el servidor local.
 
 4. Autor del proyecto: Raúl Chávez Valdivia Velarde
 

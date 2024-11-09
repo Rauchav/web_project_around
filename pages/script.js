@@ -5,7 +5,7 @@ const pageFrame = document.querySelector(".page");
 const postsCardsContainer = document.querySelector(".posts");
 const cardTemplate = document.querySelector(".post__template");
 
-let initialCards = [
+const initialCards = [
   {
     name: "Valle de Yosemite",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
@@ -33,9 +33,9 @@ let initialCards = [
 ];
 
 initialCards.forEach((card) => {
-  let clonedCard = cardTemplate.cloneNode(true).content;
-  let cardPicture = clonedCard.querySelector(".post__picture");
-  let cardTitle = clonedCard.querySelector(".post__info-bar-name");
+  const clonedCard = cardTemplate.cloneNode(true).content;
+  const cardPicture = clonedCard.querySelector(".post__picture");
+  const cardTitle = clonedCard.querySelector(".post__info-bar-name");
   cardPicture.src = card.link;
   cardPicture.alt = card.name;
   cardTitle.textContent = card.name;
@@ -184,7 +184,7 @@ postsCardsContainer.addEventListener("click", (event) => {
 
 postsCardsContainer.addEventListener("click", (event) => {
   if (event.target.classList.contains("heart-icon")) {
-    let currentIcon = event.target;
+    const currentIcon = event.target;
 
     if (currentIcon.alt === "Not liked") {
       currentIcon.alt = "Liked";
@@ -209,8 +209,8 @@ const closeCardModalButton = modalCardClone.querySelector(".close-icon");
 
 postsCardsContainer.addEventListener("click", (event) => {
   if (event.target.classList.contains("post__picture")) {
-    let currentCardImage = event.target;
-    let currentCardTitle =
+    const currentCardImage = event.target;
+    const currentCardTitle =
       currentCardImage.nextElementSibling.firstElementChild.textContent;
 
     cardImage.src = currentCardImage.src;
@@ -219,6 +219,10 @@ postsCardsContainer.addEventListener("click", (event) => {
 
     pageFrame.append(modalCard);
   }
+});
+
+closeCardModalButton.addEventListener("click", function () {
+  modalCard.remove();
 });
 
 modalCard.addEventListener("click", (evt) => {
