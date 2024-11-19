@@ -1,47 +1,5 @@
 const pageFrame = document.querySelector(".page");
-
-//Initial Cards
-
 const postsCardsContainer = document.querySelector(".posts");
-const cardTemplate = document.querySelector(".post__template");
-
-const initialCards = [
-  {
-    name: "Valle de Yosemite",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
-  },
-  {
-    name: "Lago Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
-  },
-  {
-    name: "Montañas Calvas",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
-  },
-  {
-    name: "Parque Nacional de la Vanoise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
-  },
-];
-
-initialCards.forEach((card) => {
-  const clonedCard = cardTemplate.cloneNode(true).content;
-  const cardPicture = clonedCard.querySelector(".post__picture");
-  const cardTitle = clonedCard.querySelector(".post__info-bar-name");
-  cardPicture.src = card.link;
-  cardPicture.alt = card.name;
-  cardTitle.textContent = card.name;
-
-  postsCardsContainer.append(clonedCard);
-});
 
 //Open and close modal for adding new cards
 
@@ -88,6 +46,7 @@ closeModalButtonAddCard.addEventListener("click", closeModalAddCard);
 
 const titleInput = modalAddCard.querySelector("#input1");
 const urlLinkInput = modalAddCard.querySelector("#input2");
+const cardTemplate = document.querySelector(".post__template");
 const cloneAddCard = cardTemplate.cloneNode(true).content;
 const newTitle = cloneAddCard.querySelector(".post__info-bar-name");
 const newImage = cloneAddCard.querySelector(".post__picture");
