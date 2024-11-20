@@ -17,7 +17,7 @@ function openModalAddCard() {
   modalAddCard.querySelector("#input2").type = "url";
   pageFrame.append(modalAddCard);
 
-  validateForm(modalAddCard);
+  //validateForm(modalAddCard);
 }
 
 modalAddCard.addEventListener("click", (evt) => {
@@ -29,7 +29,7 @@ modalAddCard.addEventListener("click", (evt) => {
   }
 });
 
-function closeModalAddCard() {
+export function closeModalAddCard() {
   modalAddCard.remove();
 }
 
@@ -41,29 +41,6 @@ document.addEventListener("keydown", function (evt) {
 
 addCardButton.addEventListener("click", openModalAddCard);
 closeModalButtonAddCard.addEventListener("click", closeModalAddCard);
-
-//Create new card
-
-const titleInput = modalAddCard.querySelector("#input1");
-const urlLinkInput = modalAddCard.querySelector("#input2");
-const cardTemplate = document.querySelector(".post__template");
-const cloneAddCard = cardTemplate.cloneNode(true).content;
-const newTitle = cloneAddCard.querySelector(".post__info-bar-name");
-const newImage = cloneAddCard.querySelector(".post__picture");
-const submitButtonAddCard = modalAddCard.querySelector(
-  ".modal__box-form-button"
-);
-
-function submitCardInfo(event) {
-  event.preventDefault();
-
-  newTitle.textContent = titleInput.value;
-  newImage.src = urlLinkInput.value;
-  postsCardsContainer.prepend(cloneAddCard);
-  closeModalAddCard();
-}
-
-submitButtonAddCard.addEventListener("click", submitCardInfo);
 
 //Open and close editing user info modal
 
@@ -139,22 +116,6 @@ postsCardsContainer.addEventListener("click", (event) => {
   }
 });
 
-//Like or dislike posts
-
-postsCardsContainer.addEventListener("click", (event) => {
-  if (event.target.classList.contains("heart-icon")) {
-    const currentIcon = event.target;
-
-    if (currentIcon.alt === "Not liked") {
-      currentIcon.alt = "Liked";
-      currentIcon.src = "./images/heart-icon-black.svg";
-    } else {
-      currentIcon.alt = "Not liked";
-      currentIcon.src = "./images/heart-icon.svg";
-    }
-  }
-});
-
 //Open and close expanded post picture
 
 const modalCardTemplate = document.querySelector(".modal__card-template");
@@ -198,3 +159,5 @@ document.addEventListener("keydown", function (evt) {
     modalCard.remove();
   }
 });
+
+export { modalAddCard };

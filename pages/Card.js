@@ -1,3 +1,11 @@
+import { modalAddCard, closeModalAddCard } from "./script.js";
+
+const titleInput = modalAddCard.querySelector("#input1");
+const urlLinkInput = modalAddCard.querySelector("#input2");
+const submitButtonAddCard = modalAddCard.querySelector(
+  ".modal__box-form-button"
+);
+
 const initialCards = [
   {
     name: "Valle de Yosemite",
@@ -25,6 +33,18 @@ const initialCards = [
   },
 ];
 
+function submitNewCardInfo(evt) {
+  evt.preventDefault();
+
+  const newCardInfo = {
+    name: `${titleInput.value}`,
+    link: `${urlLinkInput.value}`,
+  };
+
+  addNewCards(newCardInfo);
+  closeModalAddCard();
+}
+
 class Card {
   constructor(link, name) {
     this._link = link;
@@ -39,8 +59,19 @@ class Card {
     return cardElement;
   }
 
+  _likeCard(element) {
+    if (element.alt === "Not liked") {
+      element.alt = "Liked";
+      element.src = "./images/heart-icon-black.svg";
+    } else {
+      element.alt = "Not liked";
+      element.src = "./images/heart-icon.svg";
+    }
+  }
+
   generateCard() {
     this._element = this._getTemplate();
+    this._setEventListeners();
     this._element.querySelector(
       ".post__picture"
     ).style.backgroundImage = `url(${this._link})`;
@@ -48,6 +79,14 @@ class Card {
       this._name;
 
     return this._element;
+  }
+
+  _setEventListeners() {
+    this._element
+      .querySelector(".heart-icon")
+      .addEventListener("click", (evt) => {
+        this._likeCard(evt.target);
+      });
   }
 }
 
@@ -57,3 +96,11 @@ initialCards.forEach((item) => {
 
   document.querySelector(".posts").append(cardElement);
 });
+
+function addNewCards(cardInfo) {
+  const newCardinfo = new Card(cardInfo.link, cardInfo.name);
+  const newCard = newCardinfo.generateCard();
+  document.querySelector(".posts").prepend(newCard);
+}
+
+submitButtonAddCard.addEventListener("click", submitNewCardInfo);
