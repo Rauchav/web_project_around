@@ -11,10 +11,6 @@
   position: fixed;
 }
 
-.modal-toggle {
-  display: flex;
-}
-
 .modal__close-box {
   display: flex;
   flex-direction: row;

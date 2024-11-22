@@ -1,10 +1,5 @@
-import { modalAddCard, closeModalAddCard } from "./script.js";
-
-const titleInput = modalAddCard.querySelector("#input1");
-const urlLinkInput = modalAddCard.querySelector("#input2");
-const submitButtonAddCard = modalAddCard.querySelector(
-  ".modal__box-form-button"
-);
+import { pageFrame, createImgModal } from "./Modal.js";
+export { transportModal };
 
 const initialCards = [
   {
@@ -33,18 +28,6 @@ const initialCards = [
   },
 ];
 
-function submitNewCardInfo(evt) {
-  evt.preventDefault();
-
-  const newCardInfo = {
-    name: `${titleInput.value}`,
-    link: `${urlLinkInput.value}`,
-  };
-
-  addNewCards(newCardInfo);
-  closeModalAddCard();
-}
-
 class Card {
   constructor(link, name) {
     this._link = link;
@@ -69,14 +52,17 @@ class Card {
     }
   }
 
+  _deleteCard(element) {
+    element.closest(".post").remove();
+  }
+
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
-    this._element.querySelector(
-      ".post__picture"
-    ).style.backgroundImage = `url(${this._link})`;
+    this._element.querySelector(".post__picture").src = this._link;
     this._element.querySelector(".post__info-bar-name").textContent =
       this._name;
+    this._element.querySelector(".post__picture").alt = this._name;
 
     return this._element;
   }
@@ -86,6 +72,18 @@ class Card {
       .querySelector(".heart-icon")
       .addEventListener("click", (evt) => {
         this._likeCard(evt.target);
+      });
+
+    this._element
+      .querySelector(".post__picture")
+      .addEventListener("click", (evt) => {
+        createImgModal(evt.target);
+      });
+
+    this._element
+      .querySelector(".trash-icon")
+      .addEventListener("click", (evt) => {
+        this._deleteCard(evt.target);
       });
   }
 }
@@ -97,10 +95,31 @@ initialCards.forEach((item) => {
   document.querySelector(".posts").append(cardElement);
 });
 
-function addNewCards(cardInfo) {
-  const newCardinfo = new Card(cardInfo.link, cardInfo.name);
-  const newCard = newCardinfo.generateCard();
-  document.querySelector(".posts").prepend(newCard);
-}
+function transportModal() {
+  const modalAddCard = pageFrame.querySelector(".modal");
+  const titleInput = modalAddCard.querySelector("#input1");
+  const urlLinkInput = modalAddCard.querySelector("#input2");
+  const submitButtonAddCard = modalAddCard.querySelector(
+    ".modal__box-form-button"
+  );
 
-submitButtonAddCard.addEventListener("click", submitNewCardInfo);
+  function submitNewCardInfo(evt) {
+    evt.preventDefault();
+
+    const newCardInfo = {
+      name: `${titleInput.value}`,
+      link: `${urlLinkInput.value}`,
+    };
+
+    addNewCards(newCardInfo);
+    //closeModalAddCard();
+  }
+
+  function addNewCards(cardInfo) {
+    const newCardinfo = new Card(cardInfo.link, cardInfo.name);
+    const newCard = newCardinfo.generateCard();
+    document.querySelector(".posts").prepend(newCard);
+  }
+
+  submitButtonAddCard.addEventListener("click", submitNewCardInfo);
+}

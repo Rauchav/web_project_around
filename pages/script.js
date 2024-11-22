@@ -1,3 +1,5 @@
+/*
+
 const pageFrame = document.querySelector(".page");
 const postsCardsContainer = document.querySelector(".posts");
 
@@ -62,7 +64,7 @@ function openModalUserInfo() {
   modalUserInfoForm.name = "UserInfoForm";
   pageFrame.append(modalUserInfo);
 
-  validateForm(modalUserInfo);
+  //validateForm(modalUserInfo);
 }
 
 modalUserInfo.addEventListener("click", (evt) => {
@@ -160,4 +162,4 @@ document.addEventListener("keydown", function (evt) {
   }
 });
 
-export { modalAddCard };
+*/
