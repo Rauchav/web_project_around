@@ -1,7 +1,7 @@
-function validateForm(element) {
-  const formElement = element.querySelector(".modal__box-form");
-  const closeElement = element.querySelector(".close-icon");
-  const buttonElement = element.querySelector(".modal__box-form-button");
+function formValidator() {
+  const modal = document.querySelector(".modal");
+  const formElement = modal.querySelector(".modal__box-form");
+  const submitElement = modal.querySelector(".modal__box-form-button");
 
   const showInputError = (formElement, inputElement, errorMessage) => {
     const errorMsg = formElement.querySelector(`.${inputElement.id}-error`);
@@ -36,13 +36,13 @@ function validateForm(element) {
       formElement.querySelectorAll(".modal__box-form-input")
     );
 
-    toggleButtonState(inputList, buttonElement);
+    toggleButtonState(inputList, submitElement);
 
     inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         isValid(formElement, inputElement);
 
-        toggleButtonState(inputList, buttonElement);
+        toggleButtonState(inputList, submitElement);
       });
     });
   };
@@ -63,13 +63,7 @@ function validateForm(element) {
     }
   };
 
-  closeElement.addEventListener("click", () => {
-    formElement.reset();
-  });
-
-  buttonElement.addEventListener("click", () => {
-    formElement.reset();
-  });
-
   setEventListeners(formElement);
 }
+
+export { formValidator };

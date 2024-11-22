@@ -1,5 +1,5 @@
-import { pageFrame, createImgModal } from "./Modal.js";
-export { transportModal };
+import { createImgModal } from "./Modal.js";
+import { pageFrame, userName, userInfo } from "./script.js";
 
 const initialCards = [
   {
@@ -106,20 +106,40 @@ function transportModal() {
   function submitNewCardInfo(evt) {
     evt.preventDefault();
 
-    const newCardInfo = {
-      name: `${titleInput.value}`,
-      link: `${urlLinkInput.value}`,
-    };
+    if (evt.target.closest(".modal").id === "addCardModal") {
+      const newCardInfo = {
+        name: `${titleInput.value}`,
+        link: `${urlLinkInput.value}`,
+      };
 
-    addNewCards(newCardInfo);
-    //closeModalAddCard();
+      addNewCards(newCardInfo);
+    } else {
+      const newCardInfo = {
+        name: `${titleInput.value}`,
+        info: `${urlLinkInput.value}`,
+      };
+      editUserInfo(newCardInfo);
+    }
   }
 
   function addNewCards(cardInfo) {
     const newCardinfo = new Card(cardInfo.link, cardInfo.name);
     const newCard = newCardinfo.generateCard();
     document.querySelector(".posts").prepend(newCard);
+    closeModal();
+  }
+
+  function editUserInfo(cardInfo) {
+    userName.textContent = cardInfo.name;
+    userInfo.textContent = cardInfo.info;
+    closeModal();
+  }
+
+  function closeModal() {
+    document.querySelector(".modal").remove();
   }
 
   submitButtonAddCard.addEventListener("click", submitNewCardInfo);
 }
+
+export { transportModal };

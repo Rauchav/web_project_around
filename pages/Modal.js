@@ -1,6 +1,7 @@
 import { transportModal } from "./Card.js";
+import { formValidator } from "./FormValidator.js";
+import { pageFrame } from "./script.js";
 
-const pageFrame = document.querySelector(".page");
 const AddCardModalButton = document.querySelector(".add__card-button");
 const AddUserInfoButton = document.querySelector(
   ".profile__info-up-edit-button"
@@ -22,13 +23,14 @@ class Modal {
     return modalElement;
   }
 
-  _closeModal(element) {
+  _closeBoxModal(element) {
     element.closest(".modal").remove();
   }
 
   generateAddCardModal() {
     this._element = this._getTemplate();
     this._setEventListeners();
+    this._element.querySelector(".modal").id = "addCardModal";
     this._element.querySelector(".modal__box-title").textContent =
       "Nuevo Lugar";
     this._element.querySelector("#input1").placeholder = "Título";
@@ -41,46 +43,11 @@ class Modal {
   generateUserInfoModal() {
     this._element = this._getTemplate();
     this._setEventListeners();
+    this._element.querySelector(".modal").id = "userInfoModal";
     this._element.querySelector(".modal__box-title").textContent =
       "Editar Perfil";
     this._element.querySelector("#input1").placeholder = "Nombre";
     this._element.querySelector("#input2").placeholder = "Acerca de ti";
-
-    return this._element;
-  }
-
-  _setEventListeners() {
-    this._element
-      .querySelector(".close-icon")
-      .addEventListener("click", (evt) => {
-        this._closeModal(evt.target);
-      });
-  }
-}
-
-class ImgModal {
-  constructor(src, alt) {
-    this._src = src;
-    this._alt = alt;
-  }
-
-  _getTemplate() {
-    const modalElement = document
-      .querySelector(".modal__card-template")
-      .content.cloneNode(true);
-
-    return modalElement;
-  }
-
-  _closeBoxModal(element) {
-    element.closest(".modal").remove();
-  }
-
-  generateImgModal() {
-    this._element = this._getTemplate();
-    this._setEventListeners();
-    this._element.querySelector(".modal__card-image").src = this._src;
-    this._element.querySelector(".modal__card-title").textContent = this._alt;
 
     return this._element;
   }
@@ -103,6 +70,51 @@ class ImgModal {
   }
 }
 
+class ImgModal {
+  constructor(src, alt) {
+    this._src = src;
+    this._alt = alt;
+  }
+
+  _getTemplate() {
+    const modalElement = document
+      .querySelector(".modal__card-template")
+      .content.cloneNode(true);
+
+    return modalElement;
+  }
+
+  _closeImgModal(element) {
+    element.closest(".modal").remove();
+  }
+
+  generateImgModal() {
+    this._element = this._getTemplate();
+    this._setEventListeners();
+    this._element.querySelector(".modal__card-image").src = this._src;
+    this._element.querySelector(".modal__card-title").textContent = this._alt;
+
+    return this._element;
+  }
+
+  _setEventListeners() {
+    this._element
+      .querySelector(".close-icon")
+      .addEventListener("click", (evt) => {
+        this._closeImgModal(evt.target);
+      });
+
+    this._element.querySelector(".modal").addEventListener("click", (evt) => {
+      if (
+        evt.target.classList.contains("modal") ||
+        evt.target.classList.contains("close-icon")
+      ) {
+        this._closeImgModal(evt.target);
+      }
+    });
+  }
+}
+
 function createNewAddCardModal(modalInfo) {
   const newAddCardModalinfo = new Modal(
     modalInfo.title,
@@ -112,18 +124,20 @@ function createNewAddCardModal(modalInfo) {
   const newAddCardModal = newAddCardModalinfo.generateAddCardModal();
   pageFrame.append(newAddCardModal);
 
+  formValidator(newAddCardModal);
   transportModal();
 }
 
 function createUserInfoModal(modalInfo) {
-  const newAddCardModalinfo = new Modal(
+  const newUserInfoModalinfo = new Modal(
     modalInfo.title,
     modalInfo.placeHolder1,
     modalInfo.placeHolder2
   );
-  const newAddCardModal = newAddCardModalinfo.generateUserInfoModal();
-  pageFrame.append(newAddCardModal);
+  const newUserInfoModal = newUserInfoModalinfo.generateUserInfoModal();
+  pageFrame.append(newUserInfoModal);
 
+  formValidator(newUserInfoModal);
   transportModal();
 }
 
