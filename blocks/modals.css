@@ -76,6 +76,7 @@
 
 .modal__box-form-field {
   min-height: 80px;
+  max-width: 358px;
 }
 
 .modal__box-form-input {

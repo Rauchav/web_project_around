@@ -1,69 +1,105 @@
 function formValidator() {
   const modal = document.querySelector(".modal");
-  const formElement = modal.querySelector(".modal__box-form");
+  const currentFormElement = modal.querySelector(".modal__box-form");
   const submitElement = modal.querySelector(".modal__box-form-button");
 
-  const showInputError = (formElement, inputElement, errorMessage) => {
-    const errorMsg = formElement.querySelector(`.${inputElement.id}-error`);
-
-    inputElement.classList.add("modal__box-form-input-error");
-    errorMsg.classList.add("input-error-show");
-    errorMsg.textContent = errorMessage;
-  };
-
-  const hideInputError = (formElement, inputElement) => {
-    const errorMsg = formElement.querySelector(`.${inputElement.id}-error`);
-
-    inputElement.classList.remove("modal__box-form-input-error");
-    errorMsg.classList.remove("input-error-show");
-    errorMsg.textContent = "";
-  };
-
-  const isValid = (formElement, inputElement) => {
-    if (inputElement.validity.tooShort) {
-      showInputError(formElement, inputElement, inputElement.validationMessage);
-    } else if (inputElement.validity.valueMissing) {
-      showInputError(formElement, inputElement, inputElement.validationMessage);
-    } else if (inputElement.validity.typeMismatch) {
-      showInputError(formElement, inputElement, inputElement.validationMessage);
-    } else {
-      hideInputError(formElement, inputElement);
+  class Form {
+    constructor(formElement, inputElement, errorMessage) {
+      this._formElement = formElement;
+      this._inputElement = inputElement;
+      this._errorMessage = errorMessage;
     }
-  };
 
-  const setEventListeners = (formElement) => {
-    const inputList = Array.from(
-      formElement.querySelectorAll(".modal__box-form-input")
+    _showInputError(formElement, inputElement, errorMessage) {
+      const errorMsg = formElement.querySelector(`.${inputElement.id}-error`);
+      inputElement.classList.add("modal__box-form-input-error");
+      errorMsg.textContent = errorMessage;
+      errorMsg.style.display = "block";
+    }
+
+    _hideInputError(formElement, inputElement) {
+      const errorMsg = formElement.querySelector(`.${inputElement.id}-error`);
+      inputElement.classList.add("modal__box-form-input-error");
+      errorMsg.style.display = "none";
+    }
+
+    _isValid(formElement, inputElement) {
+      if (inputElement.validity.tooShort) {
+        this._showInputError(
+          formElement,
+          inputElement,
+          inputElement.validationMessage
+        );
+      } else if (inputElement.validity.valueMissing) {
+        this._showInputError(
+          formElement,
+          inputElement,
+          inputElement.validationMessage
+        );
+      } else if (inputElement.validity.typeMismatch) {
+        this._showInputError(
+          formElement,
+          inputElement,
+          inputElement.validationMessage
+        );
+      } else {
+        this._hideInputError(formElement, inputElement);
+      }
+    }
+
+    _setEventListeners(formElement) {
+      const inputList = Array.from(
+        formElement.querySelectorAll(".modal__box-form-input")
+      );
+
+      inputList.forEach((inputElement) => {
+        inputElement.addEventListener("input", () => {
+          this._isValid(formElement, inputElement);
+          this._toggleButtonState(inputList, submitElement);
+        });
+      });
+    }
+
+    _hasInvalidInput(inputList) {
+      return inputList.some((inputElement) => {
+        return !inputElement.validity.valid;
+      });
+    }
+
+    _toggleButtonState(inputList, submitElement) {
+      if (this._hasInvalidInput(inputList)) {
+        submitElement.classList.add("modal__box-form-button-inactive");
+        submitElement.disabled = true;
+      } else {
+        submitElement.classList.remove("modal__box-form-button-inactive");
+        submitElement.disabled = false;
+      }
+    }
+
+    generateForm() {
+      this._formElement = this._inputElement = currentFormElement
+        .querySelector(".modal__box-form-input")
+        .closest(".modal__box-form");
+      this._inputElement = currentFormElement.querySelector(
+        ".modal__box-form-input"
+      );
+      this._errorMessage = currentFormElement.querySelector(".input-error");
+
+      this._setEventListeners(this._formElement);
+    }
+  }
+
+  function passCurrentFormInfo(item) {
+    const currentForm = new Form(
+      item.formElement,
+      item.inputElement,
+      item.errorMessage
     );
 
-    toggleButtonState(inputList, submitElement);
+    currentForm.generateForm();
+  }
 
-    inputList.forEach((inputElement) => {
-      inputElement.addEventListener("input", () => {
-        isValid(formElement, inputElement);
-
-        toggleButtonState(inputList, submitElement);
-      });
-    });
-  };
-
-  const hasInvalidInput = (inputList) => {
-    return inputList.some((inputElement) => {
-      return !inputElement.validity.valid;
-    });
-  };
-
-  const toggleButtonState = (inputList, buttonElement) => {
-    if (hasInvalidInput(inputList)) {
-      buttonElement.classList.add("modal__box-form-button-inactive");
-      buttonElement.disabled = true;
-    } else {
-      buttonElement.classList.remove("modal__box-form-button-inactive");
-      buttonElement.disabled = false;
-    }
-  };
-
-  setEventListeners(formElement);
+  passCurrentFormInfo(currentFormElement);
 }
 
 export { formValidator };

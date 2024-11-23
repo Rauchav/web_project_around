@@ -1,4 +1,4 @@
-import { createImgModal } from "./Modal.js";
+import { createImgModal } from "./utils.js";
 import { pageFrame, userName, userInfo } from "./script.js";
 
 const initialCards = [
