@@ -93,6 +93,10 @@ class ImgModal {
     this._setEventListeners();
     this._element.querySelector(".modal__card-image").src = this._src;
     this._element.querySelector(".modal__card-title").textContent = this._alt;
+    //here I'm passing the name of the picture as the alt value of every modal image
+    this._element.querySelector(
+      ".modal__card-image"
+    ).alt = `fotografia de un paisaje en ${this._alt}`;
 
     return this._element;
   }

@@ -19,7 +19,7 @@ function formValidator() {
 
     _hideInputError(formElement, inputElement) {
       const errorMsg = formElement.querySelector(`.${inputElement.id}-error`);
-      inputElement.classList.add("modal__box-form-input-error");
+      inputElement.classList.remove("modal__box-form-input-error");
       errorMsg.style.display = "none";
     }
 
