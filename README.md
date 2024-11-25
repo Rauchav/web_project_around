@@ -18,3 +18,5 @@
 
 6. Este proyecto está publicado en la web con este url:
    https://rauchav.github.io/web_project_around/
+
+NOTA PARA REVISOR: Eduardo mucho gusto y muchas gracias por tu correcciones que me han hecho repensar mi código y mejorarlo siguiendo tus recomendaciones. Sé que puedo seguir mejorándolo pero espero que con los cambios que he realizado en esta segunda entrega ya pueda conntinuar con el siguiente Sprint, saludos cordiales.

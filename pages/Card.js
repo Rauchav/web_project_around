@@ -62,7 +62,7 @@ class Card {
     this._element.querySelector(".post__picture").src = this._link;
     this._element.querySelector(".post__info-bar-name").textContent =
       this._name;
-    //here I'm passing the name of the picture as the alt value of every card
+    //Aquí paso el valor de la propiedad alt en la imagen de cada tarjeta creada
     this._element.querySelector(
       ".post__picture"
     ).alt = `fotografia de un paisaje en ${this._name}`;
