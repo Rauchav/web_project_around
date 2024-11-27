@@ -1,0 +1,12 @@
+{
+  "name": "web_project_around",
+  "version": "1.0.0",
+  "description": "1. Nombre del proyecto: Tripleten Around (sprint 10)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
