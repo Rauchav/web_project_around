@@ -1,27 +1,27 @@
 export const initialCards = [
   {
     name: "Valle de Yosemite",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
+    url: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
   },
   {
     name: "Lago Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
+    url: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
   },
   {
     name: "Montañas Calvas",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
+    url: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
   },
   {
     name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
+    url: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
   },
   {
     name: "Parque Nacional de la Vanoise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
+    url: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
   },
   {
     name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
+    url: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
   },
 ];
 
@@ -38,9 +38,30 @@ export const formModals = [
   },
 ];
 
+export const imgModals = [];
+export function captureImgModalElement(element) {
+  imgModals.push({
+    src: `${element.src}`,
+    alt: `${element.alt}`,
+  });
+}
+
+export const newCards = [];
+export function captureNewCardElement(element) {
+  newCards.push({
+    name: `${element.closest(".modal").querySelector("#input1").value}`,
+    url: `${element.closest(".modal").querySelector("#input2").value}`,
+  });
+}
+
 export const cardListSelector = ".posts";
 export const pageFrame = ".page";
 export const userInfoButton = document.querySelector(
   ".profile__info-up-edit-button"
 );
 export const addCardButton = document.querySelector(".add__card-button");
+export const userName = document.querySelector(".profile__info-up-name");
+export const aboutUser = document.querySelector(
+  ".profile__info-down-profession"
+);
+export const currentModal = document.querySelector(".modal");

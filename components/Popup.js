@@ -1,3 +1,12 @@
+import {
+  imgModals,
+  userName,
+  aboutUser,
+  captureNewCardElement,
+} from "../utils/constants.js";
+
+import { captureNewCardEvt } from "../pages/index.js";
+
 class Popup {
   constructor(title, input1, input2) {
     this._title = title;
@@ -5,31 +14,74 @@ class Popup {
     this._input2 = input2;
   }
 
-  open() {}
+  close(element) {
+    element.closest(".modal").remove();
+  }
 
-  close() {}
+  _handleEscClose(evt) {
+    if (evt.key === "Escape" && document.querySelector(".modal")) {
+      document.querySelector(".modal").remove();
+    }
+  }
 
-  _handleEscClose() {}
+  setEventListeners() {
+    this._element
+      .querySelector(".close-icon")
+      .addEventListener("click", (evt) => {
+        this.close(evt.target);
+      });
 
-  setEventListeners() {}
+    this._element.querySelector(".modal").addEventListener("click", (evt) => {
+      if (
+        evt.target.classList.contains("modal") ||
+        evt.target.classList.contains("close-icon")
+      ) {
+        this.close(evt.target);
+      }
+    });
+
+    document.addEventListener("keydown", (evt) => {
+      this._handleEscClose(evt);
+    });
+  }
 }
 
-/*
-class PopupWithImage extends Popup {
+export class PopupWithImage extends Popup {
   constructor() {
     super(Popup);
   }
 
-  open() {}
+  _getTemplate() {
+    const modalElement = document
+      .querySelector(".modal__card-template")
+      .content.cloneNode(true);
 
-  close() {}
+    return modalElement;
+  }
 
-  _handleEscClose() {}
+  generateImgModal() {
+    this._element = this._getTemplate();
+    this.setEventListeners();
+    this._element.querySelector(".modal__card-image").src = imgModals[0].src;
+    this._element.querySelector(
+      ".modal__card-image"
+    ).alt = `fotografia de un paisaje en ${imgModals[0].alt}`;
+    this._element.querySelector(".modal__card-title").textContent =
+      imgModals[0].alt;
 
-  setEventListeners() {}
+    return this._element;
+  }
+
+  setEventListeners() {
+    super.setEventListeners();
+
+    console.log(this._element.querySelector(".modal__box-form-button"));
+  }
+
+  _handleEscClose() {
+    super._handleEscClose();
+  }
 }
-
-*/
 
 export class PopupWithForm extends Popup {
   constructor() {
@@ -46,6 +98,7 @@ export class PopupWithForm extends Popup {
 
   generateUserInfoModal() {
     this._element = this._getTemplate();
+    this.setEventListeners();
     this._element.querySelector(".modal").id = "userInfoModal";
     this._element.querySelector(".modal__box-title").textContent =
       "Editar Perfil";
@@ -57,6 +110,7 @@ export class PopupWithForm extends Popup {
 
   generateAddCardModal() {
     this._element = this._getTemplate();
+    this.setEventListeners();
     this._element.querySelector(".modal").id = "addCardModal";
     this._element.querySelector(".modal__box-title").textContent =
       "Nuevo Lugar";
@@ -66,28 +120,42 @@ export class PopupWithForm extends Popup {
 
     return this._element;
   }
-}
 
-/*
-export function createUserInfoModal(modalInfo) {
-  const newUserInfoModalinfo = new PopupWithForm(
-    modalInfo.title,
-    modalInfo.input1,
-    modalInfo.input2
-  );
-  const newUserInfoModal = newUserInfoModalinfo.generateModalModal();
-  console.log(newUserInfoModal);
+  setEventListeners() {
+    super.setEventListeners();
+    this._element
+      .querySelector(".modal__box-form-button")
+      .addEventListener("click", (evt) => {
+        if (evt.target.closest(".modal").id === "userInfoModal") {
+          evt.preventDefault();
+          const userInfo = new UserInfo();
+          userInfo.getUserInfo(document.querySelector(".modal"));
+          this.close(evt.target);
+        } else if (evt.target.closest(".modal").id === "addCardModal") {
+          evt.preventDefault(evt.target);
+          captureNewCardElement(evt.target);
+          captureNewCardEvt();
+          this.close(evt.target);
+        }
+      });
+  }
 }
 
 class UserInfo {
-  constructor() {}
+  constructor(name, about) {
+    this._name = name;
+    this._about = about;
+  }
 
-  open() {}
+  getUserInfo(element) {
+    this._name = element.querySelector("#input1").value;
+    this._about = element.querySelector("#input2").value;
 
-  close() {}
+    this.setUserInfo();
+  }
 
-  _handleEscClose() {}
-
-  setEventListeners() {}
+  setUserInfo() {
+    userName.textContent = this._name;
+    aboutUser.textContent = this._name;
+  }
 }
-*/
