@@ -39,10 +39,6 @@ class Popup {
         this.close(evt.target);
       }
     });
-
-    document.addEventListener("keydown", (evt) => {
-      this._handleEscClose(evt);
-    });
   }
 }
 
@@ -74,8 +70,9 @@ export class PopupWithImage extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-
-    console.log(this._element.querySelector(".modal__box-form-button"));
+    this._element.addEventListener("keydown", (evt) => {
+      this._handleEscClose(evt);
+    });
   }
 
   _handleEscClose() {
@@ -138,6 +135,10 @@ export class PopupWithForm extends Popup {
           this.close(evt.target);
         }
       });
+
+    document.addEventListener("keydown", (evt) => {
+      this._handleEscClose(evt);
+    });
   }
 }
 

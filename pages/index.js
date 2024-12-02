@@ -9,9 +9,10 @@ import {
   newCards,
 } from "../utils/constants.js";
 import { Section } from "../components/Section.js";
-import { Card } from "../pages/pruebaCard.js";
+import { Card } from "./Card.js";
 import { PopupWithForm } from "../components/Popup.js";
 import { PopupWithImage } from "../components/Popup.js";
+import { formValidator } from "../pages/FormValidator.js";
 
 const defaultCardList = new Section(
   {
@@ -80,10 +81,12 @@ const imgModal = new Section(
 
 userInfoButton.addEventListener("click", () => {
   userInfoModal.renderItem();
+  formValidator(document.querySelector(".modal"));
 });
 
 addCardButton.addEventListener("click", () => {
   addCardModal.renderItem();
+  formValidator(document.querySelector(".modal"));
 });
 
 export function captureImgInfoEvt() {
@@ -91,7 +94,6 @@ export function captureImgInfoEvt() {
 }
 
 export function captureNewCardEvt() {
-  console.log(newCards);
   newCardList.renderItems();
 }
 

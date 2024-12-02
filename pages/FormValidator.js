@@ -1,5 +1,5 @@
-function formValidator() {
-  const modal = document.querySelector(".modal");
+export function formValidator(element) {
+  const modal = element;
   const currentFormElement = modal.querySelector(".modal__box-form");
 
   passCurrentFormInfo(currentFormElement);
@@ -107,5 +107,3 @@ function enableValidation(item) {
 function passCurrentFormInfo(currentFormElement) {
   enableValidation(currentFormElement);
 }
-
-export { formValidator };
