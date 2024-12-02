@@ -1,37 +1,10 @@
-import { createImgModal } from "./utils.js";
-import { pageFrame, userName, userInfo } from "./script.js";
+import { captureImgInfoEvt } from "./index.js";
+import { captureImgModalElement } from "../utils/constants.js";
 
-const initialCards = [
-  {
-    name: "Valle de Yosemite",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
-  },
-  {
-    name: "Lago Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
-  },
-  {
-    name: "Montañas Calvas",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
-  },
-  {
-    name: "Parque Nacional de la Vanoise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
-  },
-];
-
-class Card {
-  constructor(link, name) {
-    this._link = link;
+export class Card {
+  constructor(name, url) {
     this._name = name;
+    this._url = url;
   }
 
   _getTemplate() {
@@ -59,10 +32,9 @@ class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
-    this._element.querySelector(".post__picture").src = this._link;
+    this._element.querySelector(".post__picture").src = this._url;
     this._element.querySelector(".post__info-bar-name").textContent =
       this._name;
-    //Aquí paso el valor de la propiedad alt en la imagen de cada tarjeta creada
     this._element.querySelector(
       ".post__picture"
     ).alt = `fotografia de un paisaje en ${this._name}`;
@@ -80,7 +52,8 @@ class Card {
     this._element
       .querySelector(".post__picture")
       .addEventListener("click", (evt) => {
-        createImgModal(evt.target);
+        captureImgModalElement(evt.target);
+        captureImgInfoEvt();
       });
 
     this._element
@@ -90,59 +63,3 @@ class Card {
       });
   }
 }
-
-initialCards.forEach((item) => {
-  const card = new Card(item.link, item.name);
-  const cardElement = card.generateCard();
-
-  document.querySelector(".posts").append(cardElement);
-});
-
-function transportModal() {
-  const modalAddCard = pageFrame.querySelector(".modal");
-  const titleInput = modalAddCard.querySelector("#input1");
-  const urlLinkInput = modalAddCard.querySelector("#input2");
-  const submitButtonAddCard = modalAddCard.querySelector(
-    ".modal__box-form-button"
-  );
-
-  function submitNewCardInfo(evt) {
-    evt.preventDefault();
-
-    if (evt.target.closest(".modal").id === "addCardModal") {
-      const newCardInfo = {
-        name: `${titleInput.value}`,
-        link: `${urlLinkInput.value}`,
-      };
-
-      addNewCards(newCardInfo);
-    } else {
-      const newCardInfo = {
-        name: `${titleInput.value}`,
-        info: `${urlLinkInput.value}`,
-      };
-      editUserInfo(newCardInfo);
-    }
-  }
-
-  function addNewCards(cardInfo) {
-    const newCardinfo = new Card(cardInfo.link, cardInfo.name);
-    const newCard = newCardinfo.generateCard();
-    document.querySelector(".posts").prepend(newCard);
-    closeModal();
-  }
-
-  function editUserInfo(cardInfo) {
-    userName.textContent = cardInfo.name;
-    userInfo.textContent = cardInfo.info;
-    closeModal();
-  }
-
-  function closeModal() {
-    document.querySelector(".modal").remove();
-  }
-
-  submitButtonAddCard.addEventListener("click", submitNewCardInfo);
-}
-
-export { transportModal };
