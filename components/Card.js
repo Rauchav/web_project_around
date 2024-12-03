@@ -1,4 +1,4 @@
-import { captureImgInfoEvt } from "./index.js";
+import { captureImgInfoEvt } from "../pages/index.js";
 import { captureImgModalElement } from "../utils/constants.js";
 
 export class Card {

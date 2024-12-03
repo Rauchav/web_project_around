@@ -40,7 +40,7 @@ export const formModals = [
 
 export const imgModals = [];
 export function captureImgModalElement(element) {
-  imgModals.push({
+  imgModals.unshift({
     src: `${element.src}`,
     alt: `${element.alt}`,
   });

@@ -9,9 +9,9 @@ import {
   newCards,
 } from "../utils/constants.js";
 import { Section } from "../components/Section.js";
-import { Card } from "./Card.js";
-import { PopupWithForm } from "../components/Popup.js";
-import { PopupWithImage } from "../components/Popup.js";
+import { Card } from "../components/Card.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
 import { formValidator } from "../pages/FormValidator.js";
 
 const defaultCardList = new Section(
