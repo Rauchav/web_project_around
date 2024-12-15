@@ -1,7 +1,5 @@
-import { captureNewCardElement } from "../utils/constants.js";
-import { captureNewCardEvt } from "../pages/index.js";
 import { Popup } from "../components/Popup.js";
-import { UserInfo } from "./UserInfo.js";
+import { patchUpdatedUserInfo, pushNewCardInfo } from "../utils/Api.js";
 
 export class PopupWithForm extends Popup {
   constructor() {
@@ -48,19 +46,26 @@ export class PopupWithForm extends Popup {
       .addEventListener("click", (evt) => {
         if (evt.target.closest(".modal").id === "userInfoModal") {
           evt.preventDefault();
-          const userInfo = new UserInfo();
-          userInfo.getUserInfo(document.querySelector(".modal"));
-          this.close(evt.target);
+          patchUpdatedUserInfo(evt.target);
+          renderLoading(true);
         } else if (evt.target.closest(".modal").id === "addCardModal") {
           evt.preventDefault(evt.target);
-          captureNewCardElement(evt.target);
-          captureNewCardEvt();
-          this.close(evt.target);
+          pushNewCardInfo(evt.target);
+          renderLoading(true);
         }
       });
   }
 
   _handleEscClose() {
     super._handleEscClose();
+  }
+}
+
+export function renderLoading(isLoading) {
+  if (isLoading) {
+    document.querySelector(".modal__box-form-button").textContent =
+      "Guardando...";
+  } else {
+    document.querySelector(".modal__box-form-button").textContent = "Guardar";
   }
 }

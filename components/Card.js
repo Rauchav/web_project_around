@@ -1,10 +1,12 @@
-import { captureImgInfoEvt } from "../pages/index.js";
+import { captureImgInfoEvt, captureEraseCardInfo } from "../pages/index.js";
 import { captureImgModalElement } from "../utils/constants.js";
+import { likeCardPost } from "../utils/Api.js";
 
 export class Card {
-  constructor(name, url) {
+  constructor(name, url, id) {
     this._name = name;
     this._url = url;
+    this._id = id;
   }
 
   _getTemplate() {
@@ -32,6 +34,7 @@ export class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
+    this._element.querySelector(".post").id = this._id;
     this._element.querySelector(".post__picture").src = this._url;
     this._element.querySelector(".post__info-bar-name").textContent =
       this._name;
@@ -47,6 +50,7 @@ export class Card {
       .querySelector(".heart-icon")
       .addEventListener("click", (evt) => {
         this._likeCard(evt.target);
+        likeCardPost(evt.target);
       });
 
     this._element
@@ -59,7 +63,7 @@ export class Card {
     this._element
       .querySelector(".trash-icon")
       .addEventListener("click", (evt) => {
-        this._deleteCard(evt.target);
+        captureEraseCardInfo(evt.target.closest(".post"));
       });
   }
 }

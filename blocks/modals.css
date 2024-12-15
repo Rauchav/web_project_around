@@ -86,6 +86,7 @@
   border-bottom: solid #c4c4c4 2px;
   color: black;
   margin-bottom: 5px;
+  font-family: "Inter Regular", sans-serif;
 }
 
 .modal__box-form-input-error {

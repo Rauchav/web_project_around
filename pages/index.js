@@ -1,40 +1,29 @@
 import {
-  initialCards,
   cardListSelector,
   formModals,
   pageFrame,
   userInfoButton,
   addCardButton,
   imgModals,
-  newCards,
+  cardPosts,
+  editProfilePicButton,
 } from "../utils/constants.js";
 import { Section } from "../components/Section.js";
 import { Card } from "../components/Card.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
+import { PopupConfirm } from "../components/PopupConfirm.js";
+import { PopupEditUserPic } from "../components/PopupEditUserPic.js";
 import { formValidator } from "../pages/FormValidator.js";
 
-const defaultCardList = new Section(
+export const renderedCardPosts = new Section(
   {
-    data: initialCards,
+    data: cardPosts,
     renderer: (item) => {
-      const cardElementInfo = new Card(item.name, item.url);
+      const cardElementInfo = new Card(item.name, item.url, item.id);
       const cardElement = cardElementInfo.generateCard();
 
-      defaultCardList.setItem(cardElement);
-    },
-  },
-  cardListSelector
-);
-
-const newCardList = new Section(
-  {
-    data: newCards,
-    renderer: (item) => {
-      const cardElementInfo = new Card(item.name, item.url);
-      const cardElement = cardElementInfo.generateCard();
-
-      defaultCardList.setNewCard(cardElement);
+      renderedCardPosts.setItem(cardElement);
     },
   },
   cardListSelector
@@ -79,6 +68,38 @@ const imgModal = new Section(
   pageFrame
 );
 
+const editUserPicModal = new Section(
+  {
+    data: "",
+    renderer: () => {
+      const newEditUserPicInfo = new PopupEditUserPic();
+      const newEditUserPicModal = newEditUserPicInfo.generateEditUserPicModal();
+
+      editUserPicModal.setItem(newEditUserPicModal);
+    },
+  },
+  pageFrame
+);
+
+export function captureEraseCardInfo(element) {
+  const confirmModal = new Section(
+    {
+      data: "",
+      renderer: () => {
+        const newConfirmModalInfo = new PopupConfirm();
+        const newConfirmModal = newConfirmModalInfo.generateConfirmModal(
+          element.closest(".post")
+        );
+
+        confirmModal.setItem(newConfirmModal);
+      },
+    },
+    pageFrame
+  );
+
+  confirmModal.renderItem();
+}
+
 userInfoButton.addEventListener("click", () => {
   userInfoModal.renderItem();
   formValidator(document.querySelector(".modal"));
@@ -89,12 +110,11 @@ addCardButton.addEventListener("click", () => {
   formValidator(document.querySelector(".modal"));
 });
 
+editProfilePicButton.addEventListener("click", () => {
+  editUserPicModal.renderItem();
+  formValidator(document.querySelector(".modal"));
+});
+
 export function captureImgInfoEvt() {
   imgModal.renderItem();
 }
-
-export function captureNewCardEvt() {
-  newCardList.renderItems();
-}
-
-defaultCardList.renderItems();

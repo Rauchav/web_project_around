@@ -1,20 +1,26 @@
-import { userName, aboutUser } from "../utils/constants.js";
+import { userName, aboutUser, userProfilePic } from "../utils/constants.js";
 
 export class UserInfo {
-  constructor(name, about) {
+  constructor(name, about, avatar) {
     this._name = name;
     this._about = about;
+    this._avatar = avatar;
   }
 
-  getUserInfo(element) {
-    this._name = element.querySelector("#input1").value;
-    this._about = element.querySelector("#input2").value;
-
-    this.setUserInfo();
+  updateUserInfo(object) {
+    userName.textContent = object.name;
+    aboutUser.textContent = object.about;
   }
 
-  setUserInfo() {
-    userName.textContent = this._name;
-    aboutUser.textContent = this._name;
+  updateUserPic(object) {
+    userProfilePic.style.backgroundImage = `url(${object.avatar})`;
+  }
+
+  setInitialUserInfo(object) {
+    object.forEach((user) => {
+      userName.textContent = user.name;
+      aboutUser.textContent = user.about;
+      userProfilePic.style.backgroundImage = `url(${user.avatar})`;
+    });
   }
 }
