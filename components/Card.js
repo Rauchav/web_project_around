@@ -20,10 +20,10 @@ export class Card {
   _likeCard(element) {
     if (element.alt === "Not liked") {
       element.alt = "Liked";
-      element.src = "./images/heart-icon-black.svg";
+      element.src = "../images/heart-icon-black.svg";
     } else {
       element.alt = "Not liked";
-      element.src = "./images/heart-icon.svg";
+      element.src = "../images/heart-icon.svg";
     }
   }
 
